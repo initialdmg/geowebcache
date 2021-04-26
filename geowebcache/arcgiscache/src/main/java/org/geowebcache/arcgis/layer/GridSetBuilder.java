@@ -71,6 +71,7 @@ class GridSetBuilder {
             resolutions = resAndScales[0];
 
             double[] scales = resAndScales[1];
+            scaleNames = resAndScales[2];
             // TODO: check whether pixelSize computed above should be used instead
             metersPerUnit = (GridSetFactory.DEFAULT_PIXEL_SIZE_METER * scales[0]) / resolutions[0];
         }
@@ -126,12 +127,13 @@ class GridSetBuilder {
 
     private double[][] getResolutions(List<LODInfo> lodInfos) {
         final int numLevelsOfDetail = lodInfos.size();
-        double[][] resolutionsAndScales = new double[2][numLevelsOfDetail];
+        double[][] resolutionsAndScales = new double[3][numLevelsOfDetail];
         LODInfo lodInfo;
         for (int i = 0; i < numLevelsOfDetail; i++) {
             lodInfo = lodInfos.get(i);
             resolutionsAndScales[0][i] = lodInfo.getResolution();
             resolutionsAndScales[1][i] = lodInfo.getScale();
+            resolutionsAndScales[2][i] = lodInfo.getLevelID();
         }
         return resolutionsAndScales;
     }
